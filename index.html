@@ -102,7 +102,7 @@ graphicsLayer.add(pointGraphic);
 // Define a pop-up for usaeduLayer
 const popupEduusa = {
   "title": "EDUs",
-  "content": "<b>Name:</b> {IALIAS}<br><b>Zip:</b> {ZIP}<br><b>Phone_Number:</b> {GENTELE}<br>"
+  "content": "<b>Name:</b> {INSTNM}<br><b>Zip:</b> {ZIP}<br><b>Phone_Number:</b> {GENTELE}<br>"
 }
 
 //adding the Const for the feature layer
@@ -110,7 +110,7 @@ const usaeduLayer = new FeatureLayer({
 url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Colleges_and_Universities_View/FeatureServer",
 
 //adding the popup here
-outFields:["IALIAS","ZIP","GENTELE"],
+outFields:["INSTNM","ZIP","GENTELE"],
 popupTemplate: popupEduusa
  });
 
