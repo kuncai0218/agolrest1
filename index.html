@@ -116,36 +116,7 @@ popupTemplate: popupEduusa
 
 //adding the feature layer to the map
 map.add(usaeduLayer);
-const popupStrusa = {
-  "title": "Strus",
-  "content": "<b>longtitude:</b> {LONGITUDE}<br><b>latitude:</b> {LATITUDE}<br><b>shape_Area:</b> {Shape_Area}<br>"
-}
-const usaStructureLayer = new FeatureLayer({
-url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/USA_Structures_View/FeatureServer",
-outFields: ["LONGITUDE ","LATITUDE","Shape__Area"],
-popupTemplate: popupStruusa
-});
-map.add(usaStructureLayer)
-const popupairusa = {
-  "title": "Air",
-  "content": "<b>fid:</b> {FID}<br><b>city:</b> {City}<br>"
-}
-const airportRenderer = {
-        "type": "simple",
-        "symbol": {
-          "type": "picture-marker",
-          "url": "https://sounny.github.io/agol/outline_local_airport_black_24dp.png",
-          "width": "18px",
-          "height": "18px"
-        }
-      }
-const airportLayer = new FeatureLayer({
-url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/US_Air/FeatureServer",
-renderer: airportRenderer,
-outFields: ["FID ","City"],
-popupTemplate: popupairusa
-});
-map.add(airportLayer)       
+    
     });
   </script>
 
