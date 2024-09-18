@@ -72,8 +72,8 @@ map.add(graphicsLayer);
       view.ui.add(search, "top-right");
       const point = { //Create a point  
   type: "point",  
-  longitude: -89.3838,    //long lat of Stevie Ray Vaughan Statue
-  latitude: 43.0722
+  longitude: -89.40089,    //long lat of Stevie Ray Vaughan Statue
+  latitude: 43.07581
 };
 const simpleMarkerSymbol = {  
   type: "simple-marker",  
@@ -88,8 +88,8 @@ const popupTemplate = {
     content: "{Description}"
  }
  const attributes = {
-    Name: "The city centre of Madison",
-    Description: "The capital city of Wisconsin State"
+    Name: "Science Hall",
+    Description: "Science Hall building in UW-Madison"
  }
 const pointGraphic = new Graphic({  
   geometry: point,  
@@ -134,7 +134,7 @@ const airportRenderer = {
         "type": "simple",
         "symbol": {
           "type": "picture-marker",
-          "url": "https://github.io/kuncai0218/lab2try/outline_local_airport_black_24dp.png",
+          "url": "https://github.com/kuncai0218/lab2try/blob/main/local_airport_24dp_E8EAED.png",
         "width": "18px",
           "height": "18px"
         }
