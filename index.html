@@ -102,7 +102,7 @@ graphicsLayer.add(pointGraphic);
 // Define a pop-up for usaeduLayer
 const popupEduusa = {
   "title": "EDUs",
-  "content": "<b>Name:</b> {NAME}<br><b>Total Enrollment:</b> {TOT_ENROLL}<br>"
+  "content": "<b>Name:</b> {IALIAS}<br><b>Zip:</b> {ZIP}<br><b>Phone_Number:</b> {GENTELE}<br>"
 }
 
 //adding the Const for the feature layer
@@ -110,22 +110,22 @@ const usaeduLayer = new FeatureLayer({
 url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Colleges_and_Universities_View/FeatureServer",
 
 //adding the popup here
-outFields:["NAME","TOT_ENROLL"],
+outFields:["IALIAS","ZIP","GENTELE"],
 popupTemplate: popupEduusa
  });
 
 //adding the feature layer to the map
 map.add(usaeduLayer);
-const popupStrusa = {
-"title": "Strus",
-"content": "<b>longtitude:</b> {LONGITUDE}<br><b>latitude:</b> {LATITUDE}<br><b>shape_Area:</b> {Shape_Area}<br>"
+const popupfuelusa = {
+"title": "fuel station",
+"content": "<b>Station_Name:</b> {Station_Name}<br><b>Fuel_Type:</b> {Fuel_Type}<br><b>Phone_Number:</b> {Phone_Number}<br>"
 }
-const usaStructureLayer = new FeatureLayer({
-url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/USA_Structures_View/FeatureServer",
-outFields:["LONGITUDE ","LATITUDE","Shape_Area"],
-popupTemplate: popupStrusa
+const usafuelLayer = new FeatureLayer({
+url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Alternate_Fuel/FeatureServer",
+outFields:["Station_Name","Fuel_Type","Phone_Number"],
+popupTemplate: popupfuelusa
 });
-map.add(usaStructureLayer)
+map.add(usafuelLayer)
 const popupairusa = {
   "title": "Air",
   "content": "<b>fid:</b> {FID}<br><b>city:</b> {City}<br>"
