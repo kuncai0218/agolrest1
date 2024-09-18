@@ -134,15 +134,15 @@ const airportRenderer = {
         "type": "simple",
         "symbol": {
           "type": "picture-marker",
-          "url": "https://github.com/kuncai0218/lab2try/blob/main/local_airport_24dp_E8EAED.png",
+          "url": "",
         "width": "18px",
           "height": "18px"
         }
       }
 const airportLayer = new FeatureLayer({
-url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/US_Air/FeatureServer",
+url: "https://raw.githubusercontent.com/kuncai0218/lab2try/main/local_airport_24dp_E8EAED.png",
 renderer: airportRenderer,
-outFields:["FID ","City"],
+outFields:["FID","City"],
 popupTemplate: popupairusa
 });
 map.add(airportLayer)   
