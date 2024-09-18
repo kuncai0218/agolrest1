@@ -28,7 +28,7 @@
 
       esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurP1tzBzaZYCfM5TABnzvyRn2RE0ZRt0qNEa1mc-ekn2YTL5SjOjEpIroBbgs0XhX_qlNPDE9HMIS0YRBdy2jfxsOcrKw2Zl7D0s7GJaRnuU7tn7i5ANxtswtvh-4y1nA2NNg_iywDnO7iaYRw0JEqxlcvNOBT6uD1JF-NlyZiuqxeds05bzgZAyrAo8y7aiivkC0PQVLUPUn0gmsQHFkc8g.AT1_T2318nXJ";
       const map = new Map({
-        basemap: "hybrid" // Basemap layer
+        basemap: "Topographic" // Basemap layer
       });
 
       const view = new MapView({
@@ -128,7 +128,7 @@ popupTemplate: popupfuelusa
 map.add(usafuelLayer)
 const popupairusa = {
   "title": "Air",
-  "content": "<b>fid:</b> {FID}<br><b>city:</b> {City}<br>"
+  "content": "<b>Name:</b> {Fac_Name}<br><b>Use:</b> {Fac_Use}<br>"
 }
 const airportRenderer = {
         "type": "simple",
@@ -139,10 +139,31 @@ const airportRenderer = {
           "height": "18px"
         }
       }
+//const to make the airport labels
+const airportLabels = {
+  symbol: {
+    type: "text",
+    color: "#FFFFFF",
+    haloColor: "#5E8D74",
+    haloSize: "2px",
+    font: {
+      size: "12px",
+      family: "Noto Sans",
+      style: "italic",
+      weight: "normal"
+    }
+  },
+  labelPlacement: "above-center",
+  labelExpressionInfo: {
+    expression: "$feature.Fac_Name"
+  }
+};
 const airportLayer = new FeatureLayer({
 url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/US_Air/FeatureServer",
 renderer: airportRenderer,
-outFields:["FID","City"],
+outFields:["Fac_Name","Fac_Use"],
+definitionExpression: "Fac_Type = 'AIRPORT'", //adding sql to filter for airports
+labelingInfo: [airportLabels], //adding the labels
 popupTemplate: popupairusa
 });
 map.add(airportLayer)   
