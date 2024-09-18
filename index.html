@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Hello, Map!</title>
+  <title>Hello, AGOL!</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="" />
@@ -20,10 +20,13 @@
       "esri/widgets/BasemapGallery", // 导入 BasemapGallery 模块
       "esri/widgets/Expand",
       "esri/widgets/Locate",
-      "esri/widgets/Search"  // 引入 Search 模块 // 可选：导入 Expand 模块，让 BasemapGallery 折叠显示
-    ], function (esriConfig,Map, MapView, BasemapGallery, Expand, Locate, Search) {
+      "esri/widgets/Search",
+      "esri/Graphic",  
+"esri/layers/GraphicsLayer",
+"esri/layers/FeatureLayer"  // 引入 Search 模块 // 可选：导入 Expand 模块，让 BasemapGallery 折叠显示
+    ], function (esriConfig,Map, MapView, BasemapGallery, Expand, Locate, Search,Graphic,GraphicsLayer,FeatureLayer) {
 
-      esriConfig.apiKey = "AAPK2cb19acc98eb406b80346e85af5aa1ffagWp07_WJVQlFAY2XL6xGrQ86USz9K6UzB1OaBd37PTIlYdHTo04S0-F9ETbr-dC";
+      esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurP1tzBzaZYCfM5TABnzvyRn2RE0ZRt0qNEa1mc-ekn2YTL5SjOjEpIroBbgs0XhX_qlNPDE9HMIS0YRBdy2jfxsOcrKw2Zl7D0s7GJaRnuU7tn7i5ANxtswtvh-4y1nA2NNg_iywDnO7iaYRw0JEqxlcvNOBT6uD1JF-NlyZiuqxeds05bzgZAyrAo8y7aiivkC0PQVLUPUn0gmsQHFkc8g.AT1_T2318nXJ";
       const map = new Map({
         basemap: "hybrid" // Basemap layer
       });
@@ -34,7 +37,8 @@
           zoom: 15, // Zoom level
           container: "viewDiv" // Div element
         });
-        
+        const graphicsLayer = new GraphicsLayer();  
+map.add(graphicsLayer);
               // 创建 BasemapGallery 小部件
       const basemapGallery = new BasemapGallery({
         view: view
@@ -66,8 +70,82 @@
 
       // 将 Search 小部件添加到视图的顶部右侧
       view.ui.add(search, "top-right");
-    
-        
+      const point = { //Create a point  
+  type: "point",  
+  longitude: -89.3838,    //long lat of Stevie Ray Vaughan Statue
+  latitude: 43.0722
+};
+const simpleMarkerSymbol = {  
+  type: "simple-marker",  
+  color: [0, 0, 139],  // Color of blues rock
+  outline: {  
+    color: [255, 255, 255], // White  
+    width: 1
+  }  
+};
+const popupTemplate = {
+    title: "{Name}",
+    content: "{Description}"
+ }
+ const attributes = {
+    Name: "The city centre of Madison",
+    Description: "The capital city of Wisconsin State"
+ }
+const pointGraphic = new Graphic({  
+  geometry: point,  
+  symbol: simpleMarkerSymbol,
+  attributes: attributes,
+popupTemplate: popupTemplate  
+});
+graphicsLayer.add(pointGraphic);
+
+// Define a pop-up for usaeduLayer
+const popupEduusa = {
+  "title": "EDUs",
+  "content": "<b>Name:</b> {NAME}<br><b>Total Enrollment:</b> {TOT_ENROLL}<br>"
+}
+
+//adding the Const for the feature layer
+const usaeduLayer = new FeatureLayer({
+url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Colleges_and_Universities_View/FeatureServer",
+
+//adding the popup here
+outFields: ["NAME","TOT_ENROLL"],
+popupTemplate: popupEduusa
+ });
+
+//adding the feature layer to the map
+map.add(usaeduLayer);
+const popupStrusa = {
+  "title": "Strus",
+  "content": "<b>longtitude:</b> {LONGITUDE}<br><b>latitude:</b> {LATITUDE}<br><b>shape_Area:</b> {Shape_Area}<br>"
+}
+const usaStructureLayer = new FeatureLayer({
+url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/USA_Structures_View/FeatureServer",
+outFields: ["LONGITUDE ","LATITUDE","Shape__Area"],
+popupTemplate: popupStruusa
+});
+map.add(usaStructureLayer)
+const popupairusa = {
+  "title": "Air",
+  "content": "<b>fid:</b> {FID}<br><b>city:</b> {City}<br>"
+}
+const airportRenderer = {
+        "type": "simple",
+        "symbol": {
+          "type": "picture-marker",
+          "url": "https://sounny.github.io/agol/outline_local_airport_black_24dp.png",
+          "width": "18px",
+          "height": "18px"
+        }
+      }
+const airportLayer = new FeatureLayer({
+url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/US_Air/FeatureServer",
+renderer: airportRenderer,
+outFields: ["FID ","City"],
+popupTemplate: popupairusa
+});
+map.add(airportLayer)       
     });
   </script>
 
