@@ -135,8 +135,8 @@ const airportRenderer = {
         "symbol": {
           "type": "picture-marker",
           "url": "https://sounny.github.io/agol/outline_local_airport_black_24dp.png",
-        "width": "18px",
-          "height": "18px"
+        "width": "24px",
+          "height": "24px"
         }
       }
 //const to make the airport labels
@@ -166,7 +166,29 @@ definitionExpression: "Fac_Type = 'AIRPORT'", //adding sql to filter for airport
 labelingInfo: [airportLabels], //adding the labels
 popupTemplate: popupairusa
 });
-map.add(airportLayer)   
+map.add(airportLayer) 
+const heliportRenderer = {
+        type: "simple",
+        symbol: {
+          type: "picture-marker", 
+          url: "https://github.com/kuncai0218/lab2try/blob/main/helicopter.png?raw=true", // 直升机图标URL
+          width: "18px",
+          height: "18px"
+        }
+      };
+
+      const heliportLayer = new FeatureLayer({
+        url: "https://services-nocdn.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Airports_by_scale/FeatureServer",
+        outFields: ["NAME", "OWNER", "FACILITY"],
+        popupTemplate: {
+          title: "Heliport",
+          content: "<b>Name:</b> {NAME}<br><b>Owner:</b> {Owner}<br><b>Facility:</b> {FACILITY}<br>"
+        },
+        renderer: heliportRenderer, // 使用直升机图标
+        definitionExpression: "Type = 'Heliport'" // 只筛选出 Heliport
+      });
+
+      map.add(heliportLayer);    
     
     });
   </script>
