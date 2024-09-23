@@ -23,8 +23,9 @@
       "esri/widgets/Search",
       "esri/Graphic",  
 "esri/layers/GraphicsLayer",
-"esri/layers/FeatureLayer"  // 引入 Search 模块 // 可选：导入 Expand 模块，让 BasemapGallery 折叠显示
-    ], function (esriConfig,Map, MapView, BasemapGallery, Expand, Locate, Search,Graphic,GraphicsLayer,FeatureLayer) {
+"esri/layers/FeatureLayer" ,
+"esri/widgets/Editor" // 引入 Search 模块 // 可选：导入 Expand 模块，让 BasemapGallery 折叠显示
+    ], function (esriConfig,Map, MapView, BasemapGallery, Expand, Locate, Search,Graphic,GraphicsLayer,FeatureLayer,Editor) {
 
       esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurP1tzBzaZYCfM5TABnzvyRn2RE0ZRt0qNEa1mc-ekn2YTL5SjOjEpIroBbgs0XhX_qlNPDE9HMIS0YRBdy2jfxsOcrKw2Zl7D0s7GJaRnuU7tn7i5ANxtswtvh-4y1nA2NNg_iywDnO7iaYRw0JEqxlcvNOBT6uD1JF-NlyZiuqxeds05bzgZAyrAo8y7aiivkC0PQVLUPUn0gmsQHFkc8g.AT1_T2318nXJ";
       const map = new Map({
@@ -198,6 +199,30 @@ const HeliportLabels = {
       });
 
       map.add(heliportLayer);    
+      //adding the const for the feature layer
+const myAirports = new FeatureLayer({
+ url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/My_Airports1/FeatureServer",
+ 
+ //adding the popup here
+ outFields: ["AirportCode"],
+
+});
+
+//adding the feature layer to the map
+map.add(myAirports);
+// Set the point layer's LayerInfo
+const pointInfos = {
+ layer: myAirports
+}
+
+// Begin Editor constructor
+const editor = new Editor({
+ view: view,
+ layerInfos: [pointInfos]
+ }); // End Editor constructor
+
+// Add the widget to the view
+view.ui.add(editor, "top-right");
     
     });
   </script>
