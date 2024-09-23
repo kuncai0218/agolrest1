@@ -24,8 +24,9 @@
       "esri/Graphic",  
 "esri/layers/GraphicsLayer",
 "esri/layers/FeatureLayer" ,
-"esri/widgets/Editor" // 引入 Search 模块 // 可选：导入 Expand 模块，让 BasemapGallery 折叠显示
-    ], function (esriConfig,Map, MapView, BasemapGallery, Expand, Locate, Search,Graphic,GraphicsLayer,FeatureLayer,Editor) {
+"esri/widgets/Editor",
+"esri/widgets/Legend" // 引入 Search 模块 // 可选：导入 Expand 模块，让 BasemapGallery 折叠显示
+    ], function (esriConfig,Map, MapView, BasemapGallery, Expand, Locate, Search,Graphic,GraphicsLayer,FeatureLayer,Editor,Legend) {
 
       esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurP1tzBzaZYCfM5TABnzvyRn2RE0ZRt0qNEa1mc-ekn2YTL5SjOjEpIroBbgs0XhX_qlNPDE9HMIS0YRBdy2jfxsOcrKw2Zl7D0s7GJaRnuU7tn7i5ANxtswtvh-4y1nA2NNg_iywDnO7iaYRw0JEqxlcvNOBT6uD1JF-NlyZiuqxeds05bzgZAyrAo8y7aiivkC0PQVLUPUn0gmsQHFkc8g.AT1_T2318nXJ";
       const map = new Map({
@@ -204,7 +205,7 @@ const HeliportLabels = {
   type: "simple",
   symbol: {
     type: "picture-marker", // Use picture marker symbol
-    url: "https://example.com/path-to-your-icon.png", // URL of your icon
+    url: "https://raw.githubusercontent.com/kuncai0218/agolrest1/main/415898_airport_icon.png", // URL of your icon
     width: "24px",
     height: "24px"
   }
