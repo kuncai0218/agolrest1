@@ -200,12 +200,41 @@ const HeliportLabels = {
 
       map.add(heliportLayer);    
       //adding the const for the feature layer
+      const myAirportRenderer = {
+  type: "simple",
+  symbol: {
+    type: "picture-marker", // Use picture marker symbol
+    url: "https://example.com/path-to-your-icon.png", // URL of your icon
+    width: "24px",
+    height: "24px"
+  }
+};
+const myAirportLabels = {
+  symbol: {
+    type: "text",
+    color: "#000000", // Text color
+    haloColor: "#FFFFFF", // Halo color around text
+    haloSize: "1px", // Size of the halo
+    font: {
+      size: "12px",
+      family: "Noto Sans",
+      style: "italic",
+      weight: "bold"
+    }
+  },
+  labelPlacement: "above-center", // Place label above the airport icon
+  labelExpressionInfo: {
+    expression: "$feature.AirportCode" // Field that contains the airport code
+  }
+};
+
 const myAirports = new FeatureLayer({
  url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/My_Airports1/FeatureServer",
  
  //adding the popup here
  outFields: ["AirportCode"],
-
+ renderer: myAirportRenderer, // Apply the icon renderer
+ labelingInfo: [myAirportLabels] // Add the label
 });
 
 //adding the feature layer to the map
@@ -223,6 +252,24 @@ const editor = new Editor({
 
 // Add the widget to the view
 view.ui.add(editor, "top-right");
+const legend = new Legend({
+        view: view,
+        layerInfos: [
+          {
+            layer: myAirports,
+            title: "My Airports"
+          },
+          {
+            layer: airportLayer,
+            title: "US Airports"
+          },
+          {
+            layer: heliportLayer,
+            title: "Heliports"
+          }
+        ]
+      });
+      view.ui.add(legend, "bottom-right");
     
     });
   </script>
